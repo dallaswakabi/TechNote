@@ -73,7 +73,8 @@ const Login = () => {
        }
        errRef.current.focus()
         */
-       console.log(err.response.data.message);
+       
+       console.log(err.response);
      }
     
     
