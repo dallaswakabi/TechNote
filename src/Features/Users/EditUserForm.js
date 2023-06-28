@@ -126,7 +126,7 @@ const EditUserForm = ({user}) => {
            onClick={CansaveUserClicked}
            disabled={!cansave}
            >
-            <FontAwesomeIcon icon="fa-sharp fa-regular fa-floppy-disk-circle-arrow-right" />
+            <FontAwesomeIcon icon="fas fa-save" />
            </button>
            <button
            className='icon-button'

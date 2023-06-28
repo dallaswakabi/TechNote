@@ -79,7 +79,7 @@ const NewUserForm = () => {
 
  const content = (
      <>
-       <p className={errClass}>{errClass?.data.message}</p>
+       <p className={errClass}>{errClass?.data}</p>
        <form className='form' onSubmit={CansaveUserClicked}>
          <div className='form_title-row'>
            <h2>New User</h2>
@@ -89,7 +89,7 @@ const NewUserForm = () => {
             title="save"
             disabled={!cansave}
             >
-            <FontAwesomeIcon icon="fa-sharp fa-regular fa-floppy-disk-circle-arrow-right" />
+            <FontAwesomeIcon icon="fas fa-save" />
             </button>
            </div>
          </div>

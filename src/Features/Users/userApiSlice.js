@@ -8,7 +8,7 @@ const initialState = usersAdapter.getInitialState()
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints:builder => ({
         GetUsers:builder.query({
-          query:()=> '/users',
+          query:()=> '/api/users/view',
           validateStatus:(response,result)=>{
             return response.status === 200 && !result.isError
           },
@@ -30,7 +30,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         }),
         AddNewUser:builder.mutation({
          query:initialUserData =>({
-          url:'/users',
+          url:'/api/users/create',
           method:'POST',
           body:{...initialUserData}
          }),

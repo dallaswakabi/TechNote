@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth'
 
 const Welcome = () => {
      const {isManager,isAdmin,username} = useAuth()
+       console.log(isManager,isAdmin,username)
     const date = new Date()
     const today = new Intl.DateTimeFormat('en-US',{
         dateStyle:'full',
@@ -14,9 +15,9 @@ const Welcome = () => {
         <section className='welcome'>
         <p>{today}</p>
         <h1>Welcome {username}!</h1>
-        <p><Link to="/dash/notes">View TechNotes</Link></p>
+        <p><Link to="/dash/notes/view">View TechNotes</Link></p>
         <p><Link to="/dash/notes/new">Add New Notes</Link></p>
-       {(isManager || isAdmin) && <p><Link to="/dash/users">View User Setting</Link></p>}
+       {(isManager || isAdmin) && <p><Link to="/dash/users/view">View User Setting</Link></p>}
         { (isManager || isAdmin) &&  <p><Link to="/dash/users/new">Add  New User</Link></p>}
         </section>
     )

@@ -1,12 +1,14 @@
 import {apiSlice} from '../../app/api/apiSlice'
 import {logout, setCredentials} from './AuthSlice'
 
+
+
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: builder =>({
         login:builder.mutation({
             query: credential => ({
-                url:'/auth',
-                method:'POST',
+                url:'/api/admin/auth/login',
+                method:'post',
                 body:{...credential}
             })
         }),

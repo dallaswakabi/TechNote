@@ -3,10 +3,12 @@ import {useRef,useState,useEffect} from 'react'
 import {useNavigate,Link} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import {setCredentials} from './AuthSlice'
-import {useLoginMutation}from './AuthApiSlice'
+import {useLoginMutation}from '../../app/api/apiSlice'
 import usePersist from '../../hooks/usePersist'
+//import axios from 'axios'
 
 const Login = () => {
+
   const userRef = useRef()
   const errRef  = useRef()
   const [username,setUsername] = useState('')
@@ -25,25 +27,42 @@ const Login = () => {
   
   useEffect(()=>{
     setErrMsg('')
-},[username,password])
+},[])
 
 
   const errClass = errMsg ? "errmsg" : "offscreen"
 
   const handleToggle = ()=> setPersist(prev=> !prev)
 
-  if(isLoading) return <p>loading.....</p>
+   if(isLoading) return <p>loading.....</p>
    
   const handleSubmit = async(e)=>{
+
      e.preventDefault()
-     try {
-        const {accessToken} = await login({username,password}).unwrap()
-         dispatch(setCredentials({accessToken}))
-         setUsername('')
-         setPassword('')
-         navigate('/dash')
+      
+      try {
+     /* const config = { headers: { "Content-Type": "application/json" } };
+      console.log(`error no retrieve`);
+        const response =  await axios.post('/api/admin/auth/login',{username,password},config)
+         if(response.status === 200){
+           console.log(response.data.accessToken)
+         }else{
+          console.log(response)
+         }
+        
+       */
+       
+
+      const response = await login({username,password})
+     
+
+      dispatch(setCredentials(JSON.stringify(response.data.accessToken)))
+       setUsername('')
+       setPassword('')
+      navigate('/dash')
+      
      } catch (err) {
-       if(!err.status){
+     /*  if(!err.status){
          setErrMsg('no server Response')
        }else if(err.status === 400){
         setErrMsg('Missing Username or Password')
@@ -53,7 +72,11 @@ const Login = () => {
       setErrMsg(err.data?.message)
        }
        errRef.current.focus()
+        */
+       console.log(err.response.data.message);
      }
+    
+    
   }
      
 
@@ -74,7 +97,7 @@ const Login = () => {
                 value={username}
                 onChange={(e)=>setUsername(e.target.value)}
                 autoComplete='off'
-                required
+                
                 />
                 <label htmlFor='username'>Password:</label>
                 <input 
@@ -82,8 +105,8 @@ const Login = () => {
                 type='password'
                 id='password'
                 value={password}
-                onChange={(e)=>setUsername(e.target.value)}
-                required
+                onChange={(e)=>setPassword(e.target.value)}
+              
                 />
                 <button className='form__submit-button'>Sign In</button>
                
@@ -92,7 +115,7 @@ const Login = () => {
                   type='checkbox'
                   className='form__checkbox'
                   id="persist"
-                  onChange={persist}
+                  onChange={handleToggle}
                  />
                  Trust This Device
                </label>
@@ -100,7 +123,7 @@ const Login = () => {
                </form>
              </main>
              <footer>
-              <Link to='/'>Back Home</Link>
+             <Link to='/'>Back Home</Link>
              </footer>
           </section>    
       )

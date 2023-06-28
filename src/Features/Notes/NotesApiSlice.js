@@ -8,7 +8,7 @@ const initialState = notesAdapter.getInitialState()
 export const notesApiSlice = apiSlice.injectEndpoints({
     endpoints:builder => ({
         GetNotes:builder.query({
-          query:()=> '/notes',
+          query:()=> '/api/notes/view',
           validateStatus:(response,result)=>{
             return response.status === 200 && !result.isError
           },
@@ -30,7 +30,7 @@ export const notesApiSlice = apiSlice.injectEndpoints({
         }),
         AddNewNote:builder.mutation({
           query:initialNoteData =>({
-           url:'/notes',
+           url:'/api/notes/add',
            method:'POST',
            body:{...initialNoteData}
           }),

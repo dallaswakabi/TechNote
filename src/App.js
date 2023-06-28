@@ -14,6 +14,8 @@ import Prefetch from './Features/Auth/Prefetch'
 import PersistLogin from './Features/Auth/PersistLogin'
 import RequireAuth from './Features/Auth/RequireAuth'
 import { ROLES } from "./Config/Roles";
+import Note from "./Features/Notes/Note";
+import User from "./Features/Users/User";
 
 function App() {
   return (
@@ -43,6 +45,7 @@ function App() {
         <Route path="users">
           <Route index element={<UsersList/>}/>
           <Route path=":id" element={<EditUser/>}/>
+          <Route path="view" element={<User/>}/>
           <Route path="new" element={<NewUserForm/>}/>
         </Route> 
         </Route>
@@ -52,6 +55,7 @@ function App() {
 
         <Route path="notes">
           <Route index element={<NotesList/>}/>
+          <Route path="view" element={<Note/>}/>
           <Route path=":id" element={<EditNote/>}/>
           <Route path="new" element={<NewNote/>}/>
         </Route>  
