@@ -58,7 +58,7 @@ export const apiSlice = createApi({
 export const apiSlice  = createApi({
     reducerPath:'authApi',
     baseQuery:fetchBaseQuery({
-        baseUrl:'http://127.0.0.1:4000'
+        baseUrl:'https://technote-kyob.onrender.com'
     }),
     tagTypes:['User'],
     endpoints:(builder)=>({
